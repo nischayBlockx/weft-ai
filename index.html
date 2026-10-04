@@ -5,516 +5,498 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weft AI — Fashion Trend Intelligence</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&family=Instrument+Serif&display=swap" rel="stylesheet">
-    <!-- Awin publisher verification -->
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg: #FAF9F7;
-            --bg-alt: #F1F0ED;
-            --fg: #141413;
-            --fg-secondary: #57564E;
-            --fg-tertiary: #8A897F;
-            --accent: #1A3D2B;
-            --accent-mid: #2D5A3D;
-            --accent-light: #E6EDE9;
-            --accent-bright: #3B7A57;
+            --bg: #FFFFFF;
+            --bg-soft: #F8F9FA;
+            --bg-muted: #F1F3F5;
+            --fg: #1A1A2E;
+            --fg-secondary: #5A5A72;
+            --fg-tertiary: #8E8EA0;
+            --accent: #2D6A4F;
+            --accent-hover: #245840;
+            --accent-light: #E9F5EE;
+            --accent-lighter: #F0FAF4;
             --surface: #FFFFFF;
-            --border: #E4E3DE;
-            --border-light: #EEEDEA;
-            --hero-bg: #0F1A14;
-            --hero-fg: #F4F3F0;
-            --hero-fg-muted: #9CA396;
-            --hero-accent: #5DB97A;
-            --hero-surface: rgba(255,255,255,0.06);
-            --hero-border: rgba(255,255,255,0.08);
-            --cert-green: #22C55E;
-            --cert-amber: #F59E0B;
-            --cert-red: #EF4444;
-            --radius-sm: 6px;
-            --radius-md: 10px;
-            --radius-lg: 16px;
-        }
-
-        @media (prefers-color-scheme: dark) {
-            :root:not([data-theme="light"]) {
-                --bg: #111110;
-                --bg-alt: #1A1918;
-                --fg: #EDEDEB;
-                --fg-secondary: #A3A29A;
-                --fg-tertiary: #706F68;
-                --accent: #3B7A57;
-                --accent-mid: #4A9068;
-                --accent-light: #1A2B21;
-                --accent-bright: #5DB97A;
-                --surface: #1E1D1C;
-                --border: #2E2D2B;
-                --border-light: #252423;
-                color-scheme: dark;
-            }
-        }
-        :root[data-theme="dark"] {
-            --bg: #111110;
-            --bg-alt: #1A1918;
-            --fg: #EDEDEB;
-            --fg-secondary: #A3A29A;
-            --fg-tertiary: #706F68;
-            --accent: #3B7A57;
-            --accent-mid: #4A9068;
-            --accent-light: #1A2B21;
-            --accent-bright: #5DB97A;
-            --surface: #1E1D1C;
-            --border: #2E2D2B;
-            --border-light: #252423;
-            color-scheme: dark;
+            --border: #E8E8ED;
+            --border-light: #F0F0F5;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.04), 0 1px 2px rgba(0,0,0,0.03);
+            --shadow-md: 0 4px 16px rgba(0,0,0,0.06), 0 1px 4px rgba(0,0,0,0.04);
+            --shadow-lg: 0 12px 40px rgba(0,0,0,0.08), 0 4px 12px rgba(0,0,0,0.04);
+            --radius: 8px;
+            --radius-lg: 14px;
+            --radius-xl: 20px;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
             background: var(--bg);
             color: var(--fg);
-            line-height: 1.6;
+            line-height: 1.65;
             -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
         .wrap {
-            max-width: 1120px;
+            max-width: 1140px;
             margin: 0 auto;
             padding: 0 24px;
         }
 
-        /* ── Nav ── */
+        /* ── Navigation ── */
         .site-nav {
-            position: absolute;
+            position: fixed;
             top: 0;
             left: 0;
             right: 0;
-            z-index: 10;
-            padding: 20px 0;
+            z-index: 100;
+            background: rgba(255,255,255,0.92);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-light);
+            padding: 0;
         }
 
-        .site-nav .wrap {
+        .nav-inner {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            height: 64px;
         }
 
         .logo {
-            font-family: 'Instrument Serif', serif;
-            font-size: 1.5rem;
-            color: var(--hero-fg);
+            font-family: 'DM Serif Display', serif;
+            font-size: 1.45rem;
+            color: var(--fg);
             text-decoration: none;
-            letter-spacing: -0.02em;
+            letter-spacing: 0.01em;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
-        .logo em {
-            font-style: normal;
-            font-family: 'Inter', sans-serif;
-            font-weight: 400;
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            letter-spacing: 0.12em;
-            color: var(--hero-fg-muted);
-            margin-left: 10px;
-            vertical-align: middle;
+        .logo-mark {
+            width: 32px;
+            height: 32px;
+            background: var(--accent);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-family: 'DM Serif Display', serif;
+            font-size: 1rem;
         }
 
         .nav-links {
             display: flex;
-            gap: 28px;
+            gap: 36px;
             list-style: none;
+            align-items: center;
         }
 
         .nav-links a {
             text-decoration: none;
-            color: var(--hero-fg-muted);
-            font-size: 0.82rem;
+            color: var(--fg-secondary);
+            font-size: 0.9rem;
             font-weight: 500;
-            letter-spacing: 0.01em;
             transition: color 0.2s;
         }
 
-        .nav-links a:hover { color: var(--hero-fg); }
+        .nav-links a:hover { color: var(--fg); }
 
         .nav-cta {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            background: var(--hero-accent);
-            color: var(--hero-bg) !important;
-            padding: 8px 18px;
-            border-radius: var(--radius-sm);
-            font-weight: 600;
-            font-size: 0.82rem;
-            transition: opacity 0.2s;
+            background: var(--accent);
+            color: #fff !important;
+            padding: 9px 22px;
+            border-radius: var(--radius);
+            font-weight: 600 !important;
+            font-size: 0.88rem !important;
+            transition: background 0.2s;
         }
 
-        .nav-cta:hover { opacity: 0.9; }
+        .nav-cta:hover { background: var(--accent-hover); }
 
         /* ── Hero ── */
         .hero {
-            background: var(--hero-bg);
-            padding: 140px 0 80px;
+            padding: 140px 0 100px;
+            text-align: center;
+            background: var(--bg);
             position: relative;
             overflow: hidden;
         }
 
-        .hero::after {
+        .hero::before {
             content: '';
             position: absolute;
-            top: 0;
-            right: 0;
-            bottom: 0;
-            left: 0;
-            background: radial-gradient(ellipse 60% 50% at 70% 40%, rgba(45, 90, 61, 0.15) 0%, transparent 70%);
+            top: -40%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(45, 106, 79, 0.06) 0%, transparent 70%);
             pointer-events: none;
         }
 
-        .hero-inner {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 64px;
-            align-items: center;
-            position: relative;
-            z-index: 1;
-        }
-
-        .hero-text .overline {
+        .hero-badge {
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            font-size: 0.72rem;
+            background: var(--accent-lighter);
+            color: var(--accent);
+            padding: 7px 16px;
+            border-radius: 100px;
+            font-size: 0.82rem;
             font-weight: 600;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            color: var(--hero-accent);
-            margin-bottom: 24px;
+            margin-bottom: 28px;
+            border: 1px solid rgba(45, 106, 79, 0.12);
         }
 
-        .overline-dot {
+        .hero-badge-dot {
             width: 6px;
             height: 6px;
             border-radius: 50%;
-            background: var(--hero-accent);
-            display: inline-block;
+            background: var(--accent);
         }
 
         .hero h1 {
-            font-family: 'Instrument Serif', serif;
-            font-size: clamp(2.4rem, 4.5vw, 3.6rem);
+            font-family: 'DM Serif Display', serif;
+            font-size: clamp(2.6rem, 5.5vw, 4rem);
             font-weight: 400;
-            line-height: 1.1;
-            color: var(--hero-fg);
-            margin-bottom: 20px;
-            letter-spacing: -0.02em;
+            line-height: 1.15;
+            color: var(--fg);
+            margin-bottom: 22px;
+            letter-spacing: 0.01em;
+            max-width: 720px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
-        .hero h1 em {
-            font-style: italic;
-            color: var(--hero-accent);
+        .hero h1 span {
+            color: var(--accent);
         }
 
         .hero-desc {
-            font-size: 1.05rem;
-            color: var(--hero-fg-muted);
-            line-height: 1.6;
-            max-width: 440px;
-            margin-bottom: 32px;
+            font-size: 1.15rem;
+            color: var(--fg-secondary);
+            line-height: 1.7;
+            max-width: 560px;
+            margin: 0 auto 36px;
         }
 
         .hero-actions {
             display: flex;
             align-items: center;
-            gap: 20px;
+            justify-content: center;
+            gap: 16px;
+            margin-bottom: 64px;
         }
 
         .btn-primary {
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            background: var(--hero-accent);
-            color: var(--hero-bg);
-            padding: 13px 28px;
-            border-radius: var(--radius-sm);
+            background: var(--accent);
+            color: #fff;
+            padding: 14px 32px;
+            border-radius: var(--radius);
             text-decoration: none;
             font-weight: 600;
-            font-size: 0.9rem;
-            transition: opacity 0.2s;
+            font-size: 0.95rem;
+            transition: background 0.2s, box-shadow 0.2s;
             border: none;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(45, 106, 79, 0.2);
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-hover);
+            box-shadow: 0 4px 16px rgba(45, 106, 79, 0.25);
+        }
+
+        .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--bg);
+            color: var(--fg);
+            padding: 14px 28px;
+            border-radius: var(--radius);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            border: 1px solid var(--border);
+            transition: border-color 0.2s, box-shadow 0.2s;
             cursor: pointer;
         }
 
-        .btn-primary:hover { opacity: 0.9; }
+        .btn-secondary:hover {
+            border-color: #ccc;
+            box-shadow: var(--shadow-sm);
+        }
 
-        .btn-ghost {
-            display: inline-flex;
+        /* ── Product Preview Card ── */
+        .hero-preview {
+            max-width: 720px;
+            margin: 0 auto;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-lg);
+            overflow: hidden;
+        }
+
+        .preview-bar {
+            display: flex;
             align-items: center;
-            gap: 6px;
-            color: var(--hero-fg-muted);
-            text-decoration: none;
-            font-size: 0.88rem;
+            gap: 8px;
+            padding: 14px 20px;
+            background: var(--bg-soft);
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .preview-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--border);
+        }
+
+        .preview-bar-title {
+            font-size: 0.78rem;
+            color: var(--fg-tertiary);
             font-weight: 500;
-            transition: color 0.2s;
+            margin-left: 8px;
         }
 
-        .btn-ghost:hover { color: var(--hero-fg); }
-
-        /* ── Trend Certificate Mock ── */
-        .cert-preview {
-            background: var(--hero-surface);
-            border: 1px solid var(--hero-border);
-            border-radius: var(--radius-lg);
+        .preview-body {
             padding: 28px;
-            backdrop-filter: blur(12px);
         }
 
-        .cert-header {
+        .preview-header {
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
-            margin-bottom: 20px;
-            padding-bottom: 16px;
-            border-bottom: 1px solid var(--hero-border);
+            margin-bottom: 22px;
         }
 
-        .cert-title {
-            font-size: 0.68rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: var(--hero-fg-muted);
-            margin-bottom: 6px;
-        }
-
-        .cert-trend-name {
-            font-family: 'Instrument Serif', serif;
-            font-size: 1.35rem;
-            color: var(--hero-fg);
-        }
-
-        .cert-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-            padding: 5px 12px;
-            border-radius: 20px;
+        .preview-trend-label {
             font-size: 0.7rem;
             font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
-        .cert-badge-buy {
-            background: rgba(34, 197, 94, 0.12);
-            color: var(--cert-green);
-        }
-
-        .cert-metrics {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 16px;
-            margin-bottom: 20px;
-        }
-
-        .cert-metric {
-            background: rgba(255,255,255,0.03);
-            border: 1px solid var(--hero-border);
-            border-radius: var(--radius-sm);
-            padding: 14px 12px;
-        }
-
-        .cert-metric-label {
-            font-size: 0.65rem;
-            font-weight: 500;
-            text-transform: uppercase;
             letter-spacing: 0.08em;
-            color: var(--hero-fg-muted);
+            color: var(--fg-tertiary);
             margin-bottom: 4px;
         }
 
-        .cert-metric-value {
-            font-size: 1.1rem;
+        .preview-trend-name {
+            font-family: 'DM Serif Display', serif;
+            font-size: 1.45rem;
+            color: var(--fg);
+            letter-spacing: 0.01em;
+        }
+
+        .preview-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 6px 14px;
+            border-radius: 100px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            background: var(--accent-light);
+            color: var(--accent);
+        }
+
+        .preview-metrics {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-bottom: 22px;
+        }
+
+        .preview-metric {
+            background: var(--bg-soft);
+            border-radius: var(--radius);
+            padding: 16px 14px;
+        }
+
+        .preview-metric-label {
+            font-size: 0.7rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: var(--fg-tertiary);
+            margin-bottom: 4px;
+        }
+
+        .preview-metric-value {
+            font-size: 1.25rem;
             font-weight: 700;
-            color: var(--hero-fg);
+            color: var(--fg);
             font-variant-numeric: tabular-nums;
         }
 
-        .cert-metric-value.up { color: var(--cert-green); }
+        .preview-metric-value.positive { color: #16A34A; }
 
-        .cert-chart {
-            height: 80px;
-            background: rgba(255,255,255,0.02);
-            border: 1px solid var(--hero-border);
-            border-radius: var(--radius-sm);
-            margin-bottom: 16px;
-            position: relative;
-            overflow: hidden;
+        .preview-chart {
+            height: 72px;
+            background: var(--bg-soft);
+            border-radius: var(--radius);
+            margin-bottom: 18px;
             display: flex;
             align-items: flex-end;
-            padding: 0 8px 8px;
-            gap: 3px;
+            padding: 0 10px 10px;
+            gap: 4px;
         }
 
-        .chart-bar {
+        .p-bar {
             flex: 1;
-            background: rgba(93, 185, 122, 0.25);
-            border-radius: 2px 2px 0 0;
+            background: rgba(45, 106, 79, 0.15);
+            border-radius: 3px 3px 0 0;
             min-height: 4px;
-            transition: background 0.2s;
         }
 
-        .chart-bar:last-child {
-            background: var(--hero-accent);
-        }
+        .p-bar:nth-last-child(-n+3) { background: rgba(45, 106, 79, 0.35); }
+        .p-bar:last-child { background: var(--accent); }
 
-        .cert-footer {
+        .preview-signals {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding-top: 14px;
-            border-top: 1px solid var(--hero-border);
+            gap: 16px;
+            flex-wrap: wrap;
         }
 
-        .cert-footer-item {
+        .preview-signal {
             display: flex;
             align-items: center;
             gap: 6px;
-            font-size: 0.72rem;
-            color: var(--hero-fg-muted);
+            font-size: 0.78rem;
+            color: var(--fg-secondary);
         }
 
-        .cert-dot {
+        .signal-dot {
             width: 7px;
             height: 7px;
             border-radius: 50%;
         }
 
-        .cert-dot-green { background: var(--cert-green); }
-        .cert-dot-amber { background: var(--cert-amber); }
+        .signal-green { background: #16A34A; }
+        .signal-amber { background: #F59E0B; }
 
         /* ── Trust Bar ── */
         .trust-bar {
-            background: var(--hero-bg);
-            border-top: 1px solid rgba(255,255,255,0.06);
-            padding: 28px 0;
-            position: relative;
-            z-index: 1;
+            padding: 48px 0;
+            border-bottom: 1px solid var(--border-light);
         }
 
         .trust-inner {
-            display: flex;
-            align-items: center;
-            gap: 32px;
-            justify-content: center;
-            flex-wrap: wrap;
+            text-align: center;
         }
 
         .trust-label {
-            font-size: 0.68rem;
+            font-size: 0.78rem;
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.1em;
-            color: var(--hero-fg-muted);
-            white-space: nowrap;
-        }
-
-        .trust-divider {
-            width: 1px;
-            height: 20px;
-            background: rgba(255,255,255,0.1);
+            color: var(--fg-tertiary);
+            margin-bottom: 24px;
         }
 
         .trust-logos {
             display: flex;
-            gap: 24px;
+            gap: 32px;
             flex-wrap: wrap;
             align-items: center;
+            justify-content: center;
         }
 
         .trust-name {
-            font-size: 0.85rem;
-            font-weight: 500;
-            color: rgba(255,255,255,0.35);
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--border);
             letter-spacing: 0.02em;
             white-space: nowrap;
         }
 
-        /* ── Sections (light) ── */
+        /* ── Section Defaults ── */
         .section {
-            padding: 88px 0;
+            padding: 100px 0;
         }
 
-        .section + .section {
-            border-top: 1px solid var(--border);
+        .section-header {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto 60px;
         }
 
-        .section-overline {
-            font-size: 0.68rem;
+        .section-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.78rem;
             font-weight: 600;
-            letter-spacing: 0.1em;
             text-transform: uppercase;
-            color: var(--accent-bright);
-            margin-bottom: 12px;
+            letter-spacing: 0.08em;
+            color: var(--accent);
+            margin-bottom: 14px;
         }
 
         .section h2 {
-            font-family: 'Instrument Serif', serif;
-            font-size: clamp(1.8rem, 3vw, 2.4rem);
+            font-family: 'DM Serif Display', serif;
+            font-size: clamp(1.9rem, 3.5vw, 2.6rem);
             font-weight: 400;
-            line-height: 1.15;
-            margin-bottom: 16px;
-            letter-spacing: -0.015em;
+            line-height: 1.2;
+            margin-bottom: 14px;
+            letter-spacing: 0.01em;
         }
 
-        .section-subtitle {
-            font-size: 1rem;
+        .section-desc {
+            font-size: 1.05rem;
             color: var(--fg-secondary);
-            max-width: 520px;
-            line-height: 1.6;
+            line-height: 1.7;
         }
 
-        /* ── Capabilities Grid ── */
-        .cap-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
-            margin-bottom: 48px;
+        /* ── Capabilities ── */
+        .cap-section {
+            background: var(--bg-soft);
         }
-
-        .cap-header-text { max-width: 520px; }
 
         .cap-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 1px;
-            background: var(--border);
-            border: 1px solid var(--border);
-            border-radius: var(--radius-lg);
-            overflow: hidden;
+            gap: 20px;
         }
 
-        .cap-item {
+        .cap-card {
             background: var(--surface);
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius-lg);
             padding: 32px 28px;
-            position: relative;
+            transition: box-shadow 0.25s, border-color 0.25s;
+        }
+
+        .cap-card:hover {
+            box-shadow: var(--shadow-md);
+            border-color: var(--border);
         }
 
         .cap-icon {
-            width: 36px;
-            height: 36px;
-            border-radius: var(--radius-sm);
+            width: 44px;
+            height: 44px;
+            border-radius: 10px;
             background: var(--accent-light);
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 16px;
-            color: var(--accent-mid);
+            margin-bottom: 18px;
+            color: var(--accent);
         }
 
         .cap-icon svg {
-            width: 18px;
-            height: 18px;
+            width: 20px;
+            height: 20px;
             stroke: currentColor;
             fill: none;
             stroke-width: 1.8;
@@ -522,68 +504,79 @@
             stroke-linejoin: round;
         }
 
-        .cap-item h3 {
-            font-size: 0.95rem;
+        .cap-card h3 {
+            font-size: 1rem;
             font-weight: 600;
-            margin-bottom: 6px;
+            margin-bottom: 8px;
             color: var(--fg);
+            letter-spacing: 0.01em;
         }
 
-        .cap-item p {
-            font-size: 0.85rem;
+        .cap-card p {
+            font-size: 0.9rem;
             color: var(--fg-secondary);
-            line-height: 1.55;
+            line-height: 1.6;
         }
 
         /* ── How It Works ── */
-        .hiw-grid {
+        .steps-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 48px;
-            margin-top: 56px;
-        }
-
-        .hiw-step {
+            gap: 40px;
             position: relative;
         }
 
-        .hiw-num {
-            font-family: 'Instrument Serif', serif;
-            font-size: 3rem;
-            color: var(--border);
-            line-height: 1;
-            margin-bottom: 16px;
+        .steps-grid::before {
+            content: '';
+            position: absolute;
+            top: 40px;
+            left: calc(16.66% + 20px);
+            right: calc(16.66% + 20px);
+            height: 2px;
+            background: var(--border-light);
         }
 
-        .hiw-step h3 {
+        .step {
+            text-align: center;
+            position: relative;
+        }
+
+        .step-num {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: var(--accent-light);
+            color: var(--accent);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'DM Serif Display', serif;
+            font-size: 1.25rem;
+            margin: 0 auto 20px;
+            position: relative;
+            z-index: 1;
+            border: 4px solid var(--bg);
+        }
+
+        .step h3 {
             font-size: 1.05rem;
             font-weight: 600;
             margin-bottom: 8px;
+            color: var(--fg);
         }
 
-        .hiw-step p {
-            font-size: 0.88rem;
+        .step p {
+            font-size: 0.9rem;
             color: var(--fg-secondary);
-            line-height: 1.55;
+            line-height: 1.6;
+            max-width: 300px;
+            margin: 0 auto;
         }
 
-        /* ── Stats Strip ── */
-        .stats-strip {
+        /* ── Stats ── */
+        .stats-section {
             background: var(--accent);
-            padding: 56px 0;
-        }
-
-        @media (prefers-color-scheme: dark) {
-            :root:not([data-theme="light"]) .stats-strip {
-                background: var(--bg-alt);
-                border-top: 1px solid var(--border);
-                border-bottom: 1px solid var(--border);
-            }
-        }
-        :root[data-theme="dark"] .stats-strip {
-            background: var(--bg-alt);
-            border-top: 1px solid var(--border);
-            border-bottom: 1px solid var(--border);
+            padding: 72px 0;
         }
 
         .stats-grid {
@@ -594,151 +587,310 @@
         }
 
         .stat-value {
-            font-family: 'Instrument Serif', serif;
-            font-size: 2.6rem;
+            font-family: 'DM Serif Display', serif;
+            font-size: 2.8rem;
             font-weight: 400;
             color: #fff;
             line-height: 1;
             margin-bottom: 6px;
-            letter-spacing: -0.02em;
+            letter-spacing: 0.01em;
         }
-
-        @media (prefers-color-scheme: dark) {
-            :root:not([data-theme="light"]) .stat-value { color: var(--fg); }
-        }
-        :root[data-theme="dark"] .stat-value { color: var(--fg); }
 
         .stat-label {
-            font-size: 0.78rem;
-            color: rgba(255,255,255,0.65);
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.7);
             font-weight: 500;
         }
 
-        @media (prefers-color-scheme: dark) {
-            :root:not([data-theme="light"]) .stat-label { color: var(--fg-tertiary); }
-        }
-        :root[data-theme="dark"] .stat-label { color: var(--fg-tertiary); }
-
-        /* ── CTA Section ── */
-        .cta-section {
-            padding: 88px 0;
-            text-align: center;
+        /* ── Contact Section ── */
+        .contact-section {
+            padding: 100px 0;
+            background: var(--bg-soft);
         }
 
-        .cta-section h2 {
-            font-family: 'Instrument Serif', serif;
-            font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 64px;
+            align-items: start;
+        }
+
+        .contact-info h2 {
+            font-family: 'DM Serif Display', serif;
+            font-size: clamp(1.8rem, 3vw, 2.4rem);
             font-weight: 400;
             margin-bottom: 16px;
-            letter-spacing: -0.015em;
+            letter-spacing: 0.01em;
         }
 
-        .cta-section p {
-            font-size: 1rem;
+        .contact-info > p {
+            font-size: 1.05rem;
             color: var(--fg-secondary);
-            max-width: 480px;
-            margin: 0 auto 32px;
+            line-height: 1.7;
+            margin-bottom: 36px;
         }
 
-        .btn-primary-lg {
-            display: inline-flex;
+        .contact-detail {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            margin-bottom: 24px;
+        }
+
+        .contact-detail-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            background: var(--accent-light);
+            display: flex;
             align-items: center;
+            justify-content: center;
+            color: var(--accent);
+            flex-shrink: 0;
+        }
+
+        .contact-detail-icon svg {
+            width: 18px;
+            height: 18px;
+            stroke: currentColor;
+            fill: none;
+            stroke-width: 1.8;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .contact-detail-text strong {
+            display: block;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--fg);
+            margin-bottom: 2px;
+        }
+
+        .contact-detail-text span {
+            font-size: 0.88rem;
+            color: var(--fg-secondary);
+        }
+
+        .contact-form {
+            background: var(--surface);
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius-xl);
+            padding: 36px;
+            box-shadow: var(--shadow-md);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .form-group.full {
+            grid-column: 1 / -1;
+        }
+
+        .form-group label {
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--fg);
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            padding: 11px 14px;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            font-family: inherit;
+            font-size: 0.9rem;
+            color: var(--fg);
+            background: var(--bg);
+            transition: border-color 0.2s, box-shadow 0.2s;
+            outline: none;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(45, 106, 79, 0.1);
+        }
+
+        .form-group textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: var(--fg-tertiary);
+        }
+
+        .form-submit {
+            margin-top: 8px;
+        }
+
+        .btn-submit {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             gap: 8px;
             background: var(--accent);
             color: #fff;
-            padding: 15px 36px;
-            border-radius: var(--radius-sm);
-            text-decoration: none;
+            padding: 14px 32px;
+            border-radius: var(--radius);
             font-weight: 600;
             font-size: 0.95rem;
-            transition: background 0.2s;
             border: none;
             cursor: pointer;
+            transition: background 0.2s;
+            font-family: inherit;
         }
 
-        .btn-primary-lg:hover { background: var(--accent-mid); }
+        .btn-submit:hover { background: var(--accent-hover); }
 
-        @media (prefers-color-scheme: dark) {
-            :root:not([data-theme="light"]) .btn-primary-lg {
-                background: var(--accent-bright);
-                color: var(--hero-bg);
-            }
-        }
-        :root[data-theme="dark"] .btn-primary-lg {
-            background: var(--accent-bright);
-            color: var(--hero-bg);
+        .form-note {
+            font-size: 0.78rem;
+            color: var(--fg-tertiary);
+            text-align: center;
+            margin-top: 12px;
         }
 
         /* ── Footer ── */
         .site-footer {
-            padding: 40px 0;
-            border-top: 1px solid var(--border);
+            padding: 48px 0 32px;
+            border-top: 1px solid var(--border-light);
         }
 
-        .footer-inner {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        .footer-top {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr 1fr;
+            gap: 48px;
+            margin-bottom: 40px;
         }
 
         .footer-brand {
-            font-family: 'Instrument Serif', serif;
-            font-size: 1.1rem;
+            font-family: 'DM Serif Display', serif;
+            font-size: 1.3rem;
             color: var(--fg);
-        }
-
-        .footer-brand span {
-            font-family: 'Inter', sans-serif;
-            font-size: 0.78rem;
-            color: var(--fg-tertiary);
-            font-weight: 400;
-            margin-left: 8px;
-        }
-
-        .footer-links {
+            margin-bottom: 12px;
             display: flex;
-            gap: 24px;
             align-items: center;
+            gap: 8px;
         }
 
-        .footer-links a {
+        .footer-brand-desc {
+            font-size: 0.88rem;
+            color: var(--fg-secondary);
+            line-height: 1.6;
+            max-width: 280px;
+        }
+
+        .footer-col h4 {
             font-size: 0.82rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: var(--fg);
+            margin-bottom: 16px;
+        }
+
+        .footer-col ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .footer-col a {
+            font-size: 0.88rem;
             color: var(--fg-secondary);
             text-decoration: none;
             transition: color 0.2s;
         }
 
-        .footer-links a:hover { color: var(--fg); }
+        .footer-col a:hover { color: var(--fg); }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 24px;
+            border-top: 1px solid var(--border-light);
+        }
 
         .footer-copy {
-            font-size: 0.72rem;
+            font-size: 0.78rem;
             color: var(--fg-tertiary);
-            text-align: center;
-            margin-top: 24px;
-            padding-top: 24px;
-            border-top: 1px solid var(--border);
+        }
+
+        .footer-location {
+            font-size: 0.82rem;
+            color: var(--fg-tertiary);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* ── Mobile Menu ── */
+        .mobile-toggle {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 4px;
+            color: var(--fg);
+        }
+
+        .mobile-toggle svg {
+            width: 24px;
+            height: 24px;
+            stroke: currentColor;
+            fill: none;
+            stroke-width: 2;
+            stroke-linecap: round;
         }
 
         /* ── Responsive ── */
+        @media (max-width: 900px) {
+            .cap-grid { grid-template-columns: repeat(2, 1fr); }
+            .footer-top { grid-template-columns: 1fr 1fr; gap: 32px; }
+        }
+
         @media (max-width: 768px) {
-            .hero { padding: 120px 0 56px; }
-            .hero-inner { grid-template-columns: 1fr; gap: 40px; }
-            .cert-preview { display: none; }
-            .cap-grid { grid-template-columns: 1fr; }
-            .hiw-grid { grid-template-columns: 1fr; gap: 32px; }
+            .hero { padding: 120px 0 64px; }
+            .hero h1 { font-size: 2.2rem; }
+            .hero-preview { margin: 0 -8px; }
+            .hero-actions { flex-direction: column; gap: 12px; }
+            .btn-primary, .btn-secondary { width: 100%; justify-content: center; }
+            .steps-grid { grid-template-columns: 1fr; gap: 36px; }
+            .steps-grid::before { display: none; }
             .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 24px; }
+            .contact-grid { grid-template-columns: 1fr; gap: 40px; }
+            .cap-grid { grid-template-columns: 1fr; }
             .nav-links { display: none; }
-            .trust-logos { gap: 16px; }
-            .trust-divider { display: none; }
-            .trust-inner { gap: 16px; }
-            .cap-header { flex-direction: column; align-items: flex-start; gap: 16px; }
-            .footer-inner { flex-direction: column; gap: 16px; text-align: center; }
-            .cert-metrics { grid-template-columns: repeat(2, 1fr); }
+            .mobile-toggle { display: block; }
+            .footer-top { grid-template-columns: 1fr; gap: 28px; }
+            .footer-bottom { flex-direction: column; gap: 8px; text-align: center; }
+            .preview-metrics { grid-template-columns: 1fr; }
         }
 
         @media (max-width: 480px) {
+            .wrap { padding: 0 16px; }
+            .hero { padding: 100px 0 48px; }
             .stats-grid { grid-template-columns: 1fr 1fr; }
-            .trust-logos { justify-content: center; }
+            .form-row { grid-template-columns: 1fr; }
+            .trust-logos { gap: 16px; }
+            .trust-name { font-size: 0.82rem; }
         }
     </style>
 </head>
@@ -746,89 +898,103 @@
 
     <nav class="site-nav" role="navigation" aria-label="Main navigation">
         <div class="wrap">
-            <a href="/" class="logo">Weft<em>AI</em></a>
-            <ul class="nav-links">
-                <li><a href="#capabilities">Capabilities</a></li>
-                <li><a href="#how-it-works">How It Works</a></li>
-                <li><a href="#coverage">Coverage</a></li>
-                <li><a href="mailto:nischay.vaish@gmail.com" class="nav-cta">Get Early Access</a></li>
-            </ul>
+            <div class="nav-inner">
+                <a href="/" class="logo">
+                    <span class="logo-mark">W</span>
+                    Weft AI
+                </a>
+                <ul class="nav-links">
+                    <li><a href="#capabilities">Capabilities</a></li>
+                    <li><a href="#how-it-works">How It Works</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="#contact" class="nav-cta">Get Early Access</a></li>
+                </ul>
+                <button class="mobile-toggle" aria-label="Open menu" onclick="document.querySelector('.nav-links').classList.toggle('show')">
+                    <svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+                </button>
+            </div>
         </div>
     </nav>
 
+    <!-- Hero -->
     <section class="hero">
         <div class="wrap">
-            <div class="hero-inner">
-                <div class="hero-text">
-                    <div class="overline">
-                        <span class="overline-dot"></span>
-                        UK Womenswear Intelligence
-                    </div>
-                    <h1>Spot the trend.<br>Know <em>when</em> to buy.</h1>
-                    <p class="hero-desc">Weft AI detects emerging fashion trends from social signals, validates them against search and retail data, and forecasts adoption timing — so brands buy right, early.</p>
-                    <div class="hero-actions">
-                        <a href="mailto:nischay.vaish@gmail.com" class="btn-primary">Request Early Access</a>
-                        <a href="#how-it-works" class="btn-ghost">
-                            See how it works
-                            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 2v10m0 0l4-4m-4 4L3 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                        </a>
-                    </div>
-                </div>
+            <div class="hero-badge">
+                <span class="hero-badge-dot"></span>
+                UK Womenswear Intelligence
+            </div>
+            <h1>Spot the trend. Know <span>when</span> to buy.</h1>
+            <p class="hero-desc">Weft AI detects emerging fashion trends from social signals, validates them against search and retail data, and forecasts adoption timing — so brands buy right, early.</p>
+            <div class="hero-actions">
+                <a href="#contact" class="btn-primary">
+                    Request Early Access
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10m0 0L9 4m4 4L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </a>
+                <a href="#how-it-works" class="btn-secondary">See How It Works</a>
+            </div>
 
-                <div class="cert-preview" role="img" aria-label="Example Trend Certificate showing linen trousers trend data">
-                    <div class="cert-header">
+            <!-- Product Preview -->
+            <div class="hero-preview">
+                <div class="preview-bar">
+                    <span class="preview-dot"></span>
+                    <span class="preview-dot"></span>
+                    <span class="preview-dot"></span>
+                    <span class="preview-bar-title">Trend Certificate — Live Preview</span>
+                </div>
+                <div class="preview-body">
+                    <div class="preview-header">
                         <div>
-                            <div class="cert-title">Trend Certificate</div>
-                            <div class="cert-trend-name">Linen Wide-Leg Trousers</div>
+                            <div class="preview-trend-label">Trend Certificate</div>
+                            <div class="preview-trend-name">Linen Wide-Leg Trousers</div>
                         </div>
-                        <span class="cert-badge cert-badge-buy">
+                        <span class="preview-badge">
                             <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5.5L4 7.5L8 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
                             Buy Now
                         </span>
                     </div>
-                    <div class="cert-metrics">
-                        <div class="cert-metric">
-                            <div class="cert-metric-label">Growth Rate</div>
-                            <div class="cert-metric-value up">+67%</div>
+                    <div class="preview-metrics">
+                        <div class="preview-metric">
+                            <div class="preview-metric-label">Growth Rate</div>
+                            <div class="preview-metric-value positive">+67%</div>
                         </div>
-                        <div class="cert-metric">
-                            <div class="cert-metric-label">Validation</div>
-                            <div class="cert-metric-value">3 / 3</div>
+                        <div class="preview-metric">
+                            <div class="preview-metric-label">Validation</div>
+                            <div class="preview-metric-value">3 / 3</div>
                         </div>
-                        <div class="cert-metric">
-                            <div class="cert-metric-label">Buy Window</div>
-                            <div class="cert-metric-value">4 wks</div>
+                        <div class="preview-metric">
+                            <div class="preview-metric-label">Buy Window</div>
+                            <div class="preview-metric-value">4 wks</div>
                         </div>
                     </div>
-                    <div class="cert-chart" aria-hidden="true">
-                        <div class="chart-bar" style="height: 18%"></div>
-                        <div class="chart-bar" style="height: 22%"></div>
-                        <div class="chart-bar" style="height: 20%"></div>
-                        <div class="chart-bar" style="height: 28%"></div>
-                        <div class="chart-bar" style="height: 25%"></div>
-                        <div class="chart-bar" style="height: 34%"></div>
-                        <div class="chart-bar" style="height: 42%"></div>
-                        <div class="chart-bar" style="height: 38%"></div>
-                        <div class="chart-bar" style="height: 52%"></div>
-                        <div class="chart-bar" style="height: 58%"></div>
-                        <div class="chart-bar" style="height: 55%"></div>
-                        <div class="chart-bar" style="height: 68%"></div>
-                        <div class="chart-bar" style="height: 72%"></div>
-                        <div class="chart-bar" style="height: 78%"></div>
-                        <div class="chart-bar" style="height: 85%"></div>
-                        <div class="chart-bar" style="height: 92%"></div>
+                    <div class="preview-chart" aria-hidden="true">
+                        <div class="p-bar" style="height: 15%"></div>
+                        <div class="p-bar" style="height: 20%"></div>
+                        <div class="p-bar" style="height: 18%"></div>
+                        <div class="p-bar" style="height: 26%"></div>
+                        <div class="p-bar" style="height: 24%"></div>
+                        <div class="p-bar" style="height: 32%"></div>
+                        <div class="p-bar" style="height: 40%"></div>
+                        <div class="p-bar" style="height: 36%"></div>
+                        <div class="p-bar" style="height: 50%"></div>
+                        <div class="p-bar" style="height: 56%"></div>
+                        <div class="p-bar" style="height: 54%"></div>
+                        <div class="p-bar" style="height: 66%"></div>
+                        <div class="p-bar" style="height: 72%"></div>
+                        <div class="p-bar" style="height: 78%"></div>
+                        <div class="p-bar" style="height: 86%"></div>
+                        <div class="p-bar" style="height: 94%"></div>
                     </div>
-                    <div class="cert-footer">
-                        <div class="cert-footer-item">
-                            <span class="cert-dot cert-dot-green"></span>
+                    <div class="preview-signals">
+                        <div class="preview-signal">
+                            <span class="signal-dot signal-green"></span>
                             Search demand rising
                         </div>
-                        <div class="cert-footer-item">
-                            <span class="cert-dot cert-dot-green"></span>
+                        <div class="preview-signal">
+                            <span class="signal-dot signal-green"></span>
                             9/12 retailers stocking
                         </div>
-                        <div class="cert-footer-item">
-                            <span class="cert-dot cert-dot-amber"></span>
+                        <div class="preview-signal">
+                            <span class="signal-dot signal-amber"></span>
                             Early → Mainstream
                         </div>
                     </div>
@@ -837,11 +1003,11 @@
         </div>
     </section>
 
+    <!-- Trust Bar -->
     <div class="trust-bar">
         <div class="wrap">
             <div class="trust-inner">
-                <span class="trust-label">Tracking 12 UK Retailers</span>
-                <span class="trust-divider"></span>
+                <div class="trust-label">Tracking 12 UK Retailers</div>
                 <div class="trust-logos">
                     <span class="trust-name">ASOS</span>
                     <span class="trust-name">Zara</span>
@@ -860,88 +1026,91 @@
         </div>
     </div>
 
-    <section class="section" id="capabilities">
+    <!-- Capabilities -->
+    <section class="section cap-section" id="capabilities">
         <div class="wrap">
-            <div class="cap-header">
-                <div class="cap-header-text">
-                    <div class="section-overline">Capabilities</div>
-                    <h2>From social signal to buy decision</h2>
-                    <p class="section-subtitle">Every trend is detected, attributed, validated, and timed — so your buying team gets a recommendation, not raw data.</p>
-                </div>
+            <div class="section-header">
+                <div class="section-tag">Capabilities</div>
+                <h2>From social signal to buy decision</h2>
+                <p class="section-desc">Every trend is detected, validated, and timed — so your buying team gets a recommendation, not raw data.</p>
             </div>
             <div class="cap-grid">
-                <div class="cap-item">
+                <div class="cap-card">
                     <div class="cap-icon">
                         <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M2 12s4-8 10-8 10 8 10 8-4 8-10 8-10-8-10-8z"/></svg>
                     </div>
                     <h3>Trend Detection</h3>
                     <p>Identifies emerging garment trends — silhouettes, fabrics, colours, patterns — from thousands of creator posts across the UK.</p>
                 </div>
-                <div class="cap-item">
-                    <div class="cap-icon">
-                        <svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
-                    </div>
-                    <h3>Causal Attribution</h3>
-                    <p>Not just correlation — identifies why a trend is growing: creator seeding, viral moments, seasonal demand, or price-driven adoption.</p>
-                </div>
-                <div class="cap-item">
-                    <div class="cap-icon">
-                        <svg viewBox="0 0 24 24"><path d="M12 2v4m0 12v4M4.93 4.93l2.83 2.83m8.48 8.48l2.83 2.83M2 12h4m12 0h4M4.93 19.07l2.83-2.83m8.48-8.48l2.83-2.83"/></svg>
-                    </div>
-                    <h3>Adoption Forecasting</h3>
-                    <p>Proprietary models predict when a trend crosses from early adopters to mainstream, with a precise buy window in weeks.</p>
-                </div>
-                <div class="cap-item">
+                <div class="cap-card">
                     <div class="cap-icon">
                         <svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
                     </div>
                     <h3>Triple Validation</h3>
                     <p>Every trend confirmed against three external signals: Google search interest, UK retail shelf presence, and runway origin.</p>
                 </div>
-                <div class="cap-item">
+                <div class="cap-card">
+                    <div class="cap-icon">
+                        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                    </div>
+                    <h3>Adoption Forecasting</h3>
+                    <p>Predicts when a trend crosses from early adopters to mainstream, with a precise buy window in weeks — not months.</p>
+                </div>
+                <div class="cap-card">
                     <div class="cap-icon">
                         <svg viewBox="0 0 24 24"><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
                     </div>
                     <h3>Retail Monitoring</h3>
-                    <p>Daily product feeds from UK fashion retailers tracked for availability, pricing, new arrivals, and stock depletion.</p>
+                    <p>Daily product feeds from UK fashion retailers tracked for availability, pricing, new arrivals, and stock depletion signals.</p>
                 </div>
-                <div class="cap-item">
+                <div class="cap-card">
                     <div class="cap-icon">
                         <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8m8 4H8m2-8H8"/></svg>
                     </div>
                     <h3>Trend Certificate</h3>
-                    <p>One-page output per trend: growth rate, causal drivers, forecast, validation score, and a clear buy / monitor / avoid call.</p>
+                    <p>One-page output per trend: growth rate, forecast, validation score, and a clear buy / monitor / avoid recommendation.</p>
+                </div>
+                <div class="cap-card">
+                    <div class="cap-icon">
+                        <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4-4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87m-4-12a4 4 0 010 7.75"/></svg>
+                    </div>
+                    <h3>Creator Intelligence</h3>
+                    <p>Track which UK influencers are driving trends across the adoption curve — from innovators to mainstream creators.</p>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- How It Works -->
     <section class="section" id="how-it-works">
         <div class="wrap">
-            <div class="section-overline">How It Works</div>
-            <h2>Intelligence, delivered weekly</h2>
-            <p class="section-subtitle">Our proprietary AI pipeline turns raw social signals into actionable buy decisions — so you don't have to.</p>
-            <div class="hiw-grid">
-                <div class="hiw-step">
-                    <div class="hiw-num">01</div>
+            <div class="section-header">
+                <div class="section-tag">How It Works</div>
+                <h2>Intelligence, delivered weekly</h2>
+                <p class="section-desc">Our AI pipeline turns raw social signals into actionable buy decisions — so you don't have to.</p>
+            </div>
+            <div class="steps-grid">
+                <div class="step">
+                    <div class="step-num">1</div>
                     <h3>We Listen</h3>
-                    <p>Our AI continuously monitors social signals across the UK fashion landscape — creators, engagement, and emerging patterns.</p>
+                    <p>Our AI monitors social signals across the UK fashion landscape — creators, engagement patterns, and emerging styles.</p>
                 </div>
-                <div class="hiw-step">
-                    <div class="hiw-num">02</div>
+                <div class="step">
+                    <div class="step-num">2</div>
                     <h3>We Validate</h3>
                     <p>Every signal is cross-checked against search demand, retail availability, and runway data. No single-source guessing.</p>
                 </div>
-                <div class="hiw-step">
-                    <div class="hiw-num">03</div>
+                <div class="step">
+                    <div class="step-num">3</div>
                     <h3>You Act</h3>
-                    <p>You receive a Trend Certificate with a clear recommendation: buy now, monitor, or skip — with the timing to move first.</p>
+                    <p>You receive a Trend Certificate with a clear recommendation: buy now, monitor, or skip — with timing to move first.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <div class="stats-strip">
+    <!-- Stats -->
+    <div class="stats-section">
         <div class="wrap">
             <div class="stats-grid">
                 <div>
@@ -964,26 +1133,158 @@
         </div>
     </div>
 
-    <section class="cta-section" id="contact">
+    <!-- Contact -->
+    <section class="contact-section" id="contact">
         <div class="wrap">
-            <h2>Ready to buy ahead of the curve?</h2>
-            <p>Join the early access programme. We work with a small number of UK fashion brands during the pilot — apply to secure your slot.</p>
-            <a href="mailto:nischay.vaish@gmail.com" class="btn-primary-lg">Request Early Access</a>
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <h2>Get in touch</h2>
+                    <p>Join the early access programme. We work with a small number of UK fashion brands during the pilot — apply to secure your slot.</p>
+
+                    <div class="contact-detail">
+                        <div class="contact-detail-icon">
+                            <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="M22 6l-10 7L2 6"/></svg>
+                        </div>
+                        <div class="contact-detail-text">
+                            <strong>Email</strong>
+                            <span>nischay.vaish@gmail.com</span>
+                        </div>
+                    </div>
+
+                    <div class="contact-detail">
+                        <div class="contact-detail-icon">
+                            <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                        </div>
+                        <div class="contact-detail-text">
+                            <strong>Location</strong>
+                            <span>London, United Kingdom</span>
+                        </div>
+                    </div>
+
+                    <div class="contact-detail">
+                        <div class="contact-detail-icon">
+                            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                        </div>
+                        <div class="contact-detail-text">
+                            <strong>Response Time</strong>
+                            <span>We typically respond within 24 hours</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contact-form">
+                    <form action="https://formspree.io/f/placeholder" method="POST">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="name">Full Name</label>
+                                <input type="text" id="name" name="name" placeholder="Your name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Work Email</label>
+                                <input type="email" id="email" name="email" placeholder="you@company.com" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="company">Company</label>
+                                <input type="text" id="company" name="company" placeholder="Your company">
+                            </div>
+                            <div class="form-group">
+                                <label for="role">Your Role</label>
+                                <select id="role" name="role">
+                                    <option value="" disabled selected>Select your role</option>
+                                    <option value="buyer">Buyer / Merchandiser</option>
+                                    <option value="head-buying">Head of Buying</option>
+                                    <option value="designer">Designer</option>
+                                    <option value="founder">Founder / CEO</option>
+                                    <option value="marketing">Marketing</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group full" style="margin-bottom: 16px;">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" placeholder="Tell us about your brand and what you're looking for..."></textarea>
+                        </div>
+                        <div class="form-submit">
+                            <button type="submit" class="btn-submit">
+                                Request Early Access
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10m0 0L9 4m4 4L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                            </button>
+                        </div>
+                        <p class="form-note">We'll get back to you within 24 hours. No spam, ever.</p>
+                    </form>
+                </div>
+            </div>
         </div>
     </section>
 
+    <!-- Footer -->
     <footer class="site-footer">
         <div class="wrap">
-            <div class="footer-inner">
-                <div class="footer-brand">Weft<span>AI — Fashion Trend Intelligence</span></div>
-                <div class="footer-links">
-                    <span style="font-size: 0.82rem; color: var(--fg-tertiary);">London, United Kingdom</span>
-                    <a href="mailto:nischay.vaish@gmail.com">nischay.vaish@gmail.com</a>
+            <div class="footer-top">
+                <div>
+                    <div class="footer-brand">
+                        <span class="logo-mark" style="width:28px;height:28px;font-size:0.85rem;border-radius:6px;">W</span>
+                        Weft AI
+                    </div>
+                    <p class="footer-brand-desc">AI-powered fashion trend intelligence for UK womenswear brands. Detect trends early, validate with data, buy with confidence.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Product</h4>
+                    <ul>
+                        <li><a href="#capabilities">Capabilities</a></li>
+                        <li><a href="#how-it-works">How It Works</a></li>
+                        <li><a href="#contact">Early Access</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="mailto:nischay.vaish@gmail.com">Email Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                    </ul>
                 </div>
             </div>
-            <p class="footer-copy">&copy; 2026 Weft AI. All rights reserved.</p>
+            <div class="footer-bottom">
+                <span class="footer-copy">&copy; 2026 Weft AI. All rights reserved.</span>
+                <span class="footer-location">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    London, United Kingdom
+                </span>
+            </div>
         </div>
     </footer>
+
+    <style>
+        @media (max-width: 768px) {
+            .nav-links.show {
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                top: 64px;
+                left: 0;
+                right: 0;
+                background: rgba(255,255,255,0.98);
+                backdrop-filter: blur(12px);
+                padding: 20px 24px;
+                border-bottom: 1px solid var(--border-light);
+                gap: 16px;
+            }
+            .nav-links.show .nav-cta {
+                text-align: center;
+                display: block;
+                padding: 12px;
+            }
+        }
+    </style>
 
 </body>
 </html>
