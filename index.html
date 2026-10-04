@@ -5,19 +5,67 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weft AI — Fashion Trend Intelligence</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&family=Instrument+Serif&display=swap" rel="stylesheet">
     <!-- Awin publisher verification -->
     <style>
         :root {
-            --bg: #FAFAF8;
-            --fg: #1A1A1A;
-            --fg-muted: #6B6B6B;
-            --accent: #2D5A3D;
-            --accent-light: #E8F0EB;
-            --card-bg: #FFFFFF;
-            --card-border: #E8E8E4;
-            --gradient-start: #2D5A3D;
-            --gradient-end: #1B3A26;
+            --bg: #FAF9F7;
+            --bg-alt: #F1F0ED;
+            --fg: #141413;
+            --fg-secondary: #57564E;
+            --fg-tertiary: #8A897F;
+            --accent: #1A3D2B;
+            --accent-mid: #2D5A3D;
+            --accent-light: #E6EDE9;
+            --accent-bright: #3B7A57;
+            --surface: #FFFFFF;
+            --border: #E4E3DE;
+            --border-light: #EEEDEA;
+            --hero-bg: #0F1A14;
+            --hero-fg: #F4F3F0;
+            --hero-fg-muted: #9CA396;
+            --hero-accent: #5DB97A;
+            --hero-surface: rgba(255,255,255,0.06);
+            --hero-border: rgba(255,255,255,0.08);
+            --cert-green: #22C55E;
+            --cert-amber: #F59E0B;
+            --cert-red: #EF4444;
+            --radius-sm: 6px;
+            --radius-md: 10px;
+            --radius-lg: 16px;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root:not([data-theme="light"]) {
+                --bg: #111110;
+                --bg-alt: #1A1918;
+                --fg: #EDEDEB;
+                --fg-secondary: #A3A29A;
+                --fg-tertiary: #706F68;
+                --accent: #3B7A57;
+                --accent-mid: #4A9068;
+                --accent-light: #1A2B21;
+                --accent-bright: #5DB97A;
+                --surface: #1E1D1C;
+                --border: #2E2D2B;
+                --border-light: #252423;
+                color-scheme: dark;
+            }
+        }
+        :root[data-theme="dark"] {
+            --bg: #111110;
+            --bg-alt: #1A1918;
+            --fg: #EDEDEB;
+            --fg-secondary: #A3A29A;
+            --fg-tertiary: #706F68;
+            --accent: #3B7A57;
+            --accent-mid: #4A9068;
+            --accent-light: #1A2B21;
+            --accent-bright: #5DB97A;
+            --surface: #1E1D1C;
+            --border: #2E2D2B;
+            --border-light: #252423;
+            color-scheme: dark;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -27,459 +75,915 @@
             background: var(--bg);
             color: var(--fg);
             line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
         }
 
-        .container {
-            max-width: 1080px;
+        .wrap {
+            max-width: 1120px;
             margin: 0 auto;
             padding: 0 24px;
         }
 
-        nav {
+        /* ── Nav ── */
+        .site-nav {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 10;
             padding: 20px 0;
-            border-bottom: 1px solid var(--card-border);
         }
 
-        nav .container {
+        .site-nav .wrap {
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
         .logo {
-            font-family: 'Playfair Display', serif;
+            font-family: 'Instrument Serif', serif;
             font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--accent);
+            color: var(--hero-fg);
             text-decoration: none;
+            letter-spacing: -0.02em;
         }
 
-        .logo span {
+        .logo em {
+            font-style: normal;
             font-family: 'Inter', sans-serif;
             font-weight: 400;
-            font-size: 0.85rem;
-            color: var(--fg-muted);
-            margin-left: 8px;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--hero-fg-muted);
+            margin-left: 10px;
+            vertical-align: middle;
         }
 
         .nav-links {
             display: flex;
-            gap: 32px;
+            gap: 28px;
             list-style: none;
         }
 
         .nav-links a {
             text-decoration: none;
-            color: var(--fg-muted);
+            color: var(--hero-fg-muted);
+            font-size: 0.82rem;
+            font-weight: 500;
+            letter-spacing: 0.01em;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover { color: var(--hero-fg); }
+
+        .nav-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: var(--hero-accent);
+            color: var(--hero-bg) !important;
+            padding: 8px 18px;
+            border-radius: var(--radius-sm);
+            font-weight: 600;
+            font-size: 0.82rem;
+            transition: opacity 0.2s;
+        }
+
+        .nav-cta:hover { opacity: 0.9; }
+
+        /* ── Hero ── */
+        .hero {
+            background: var(--hero-bg);
+            padding: 140px 0 80px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background: radial-gradient(ellipse 60% 50% at 70% 40%, rgba(45, 90, 61, 0.15) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .hero-inner {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 64px;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-text .overline {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--hero-accent);
+            margin-bottom: 24px;
+        }
+
+        .overline-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--hero-accent);
+            display: inline-block;
+        }
+
+        .hero h1 {
+            font-family: 'Instrument Serif', serif;
+            font-size: clamp(2.4rem, 4.5vw, 3.6rem);
+            font-weight: 400;
+            line-height: 1.1;
+            color: var(--hero-fg);
+            margin-bottom: 20px;
+            letter-spacing: -0.02em;
+        }
+
+        .hero h1 em {
+            font-style: italic;
+            color: var(--hero-accent);
+        }
+
+        .hero-desc {
+            font-size: 1.05rem;
+            color: var(--hero-fg-muted);
+            line-height: 1.6;
+            max-width: 440px;
+            margin-bottom: 32px;
+        }
+
+        .hero-actions {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--hero-accent);
+            color: var(--hero-bg);
+            padding: 13px 28px;
+            border-radius: var(--radius-sm);
+            text-decoration: none;
+            font-weight: 600;
             font-size: 0.9rem;
+            transition: opacity 0.2s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary:hover { opacity: 0.9; }
+
+        .btn-ghost {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--hero-fg-muted);
+            text-decoration: none;
+            font-size: 0.88rem;
             font-weight: 500;
             transition: color 0.2s;
         }
 
-        .nav-links a:hover { color: var(--accent); }
+        .btn-ghost:hover { color: var(--hero-fg); }
 
-        .hero {
-            padding: 80px 0 60px;
-            text-align: center;
+        /* ── Trend Certificate Mock ── */
+        .cert-preview {
+            background: var(--hero-surface);
+            border: 1px solid var(--hero-border);
+            border-radius: var(--radius-lg);
+            padding: 28px;
+            backdrop-filter: blur(12px);
         }
 
-        .hero-badge {
-            display: inline-block;
-            background: var(--accent-light);
-            color: var(--accent);
-            font-size: 0.8rem;
-            font-weight: 600;
-            padding: 6px 16px;
-            border-radius: 20px;
-            margin-bottom: 24px;
-            letter-spacing: 0.05em;
-            text-transform: uppercase;
-        }
-
-        h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(2.2rem, 5vw, 3.5rem);
-            font-weight: 700;
-            line-height: 1.15;
+        .cert-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
             margin-bottom: 20px;
-            text-wrap: balance;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--hero-border);
         }
 
-        .hero p {
-            font-size: 1.15rem;
-            color: var(--fg-muted);
-            max-width: 600px;
-            margin: 0 auto 36px;
-        }
-
-        .cta-btn {
-            display: inline-block;
-            background: var(--accent);
-            color: #fff;
-            padding: 14px 32px;
-            border-radius: 8px;
-            text-decoration: none;
+        .cert-title {
+            font-size: 0.68rem;
             font-weight: 600;
-            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--hero-fg-muted);
+            margin-bottom: 6px;
+        }
+
+        .cert-trend-name {
+            font-family: 'Instrument Serif', serif;
+            font-size: 1.35rem;
+            color: var(--hero-fg);
+        }
+
+        .cert-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .cert-badge-buy {
+            background: rgba(34, 197, 94, 0.12);
+            color: var(--cert-green);
+        }
+
+        .cert-metrics {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
+        .cert-metric {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid var(--hero-border);
+            border-radius: var(--radius-sm);
+            padding: 14px 12px;
+        }
+
+        .cert-metric-label {
+            font-size: 0.65rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--hero-fg-muted);
+            margin-bottom: 4px;
+        }
+
+        .cert-metric-value {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--hero-fg);
+            font-variant-numeric: tabular-nums;
+        }
+
+        .cert-metric-value.up { color: var(--cert-green); }
+
+        .cert-chart {
+            height: 80px;
+            background: rgba(255,255,255,0.02);
+            border: 1px solid var(--hero-border);
+            border-radius: var(--radius-sm);
+            margin-bottom: 16px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: flex-end;
+            padding: 0 8px 8px;
+            gap: 3px;
+        }
+
+        .chart-bar {
+            flex: 1;
+            background: rgba(93, 185, 122, 0.25);
+            border-radius: 2px 2px 0 0;
+            min-height: 4px;
             transition: background 0.2s;
         }
 
-        .cta-btn:hover { background: var(--gradient-end); }
+        .chart-bar:last-child {
+            background: var(--hero-accent);
+        }
 
-        .section-label {
-            font-size: 0.75rem;
+        .cert-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 14px;
+            border-top: 1px solid var(--hero-border);
+        }
+
+        .cert-footer-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.72rem;
+            color: var(--hero-fg-muted);
+        }
+
+        .cert-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+        }
+
+        .cert-dot-green { background: var(--cert-green); }
+        .cert-dot-amber { background: var(--cert-amber); }
+
+        /* ── Trust Bar ── */
+        .trust-bar {
+            background: var(--hero-bg);
+            border-top: 1px solid rgba(255,255,255,0.06);
+            padding: 28px 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        .trust-inner {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .trust-label {
+            font-size: 0.68rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--hero-fg-muted);
+            white-space: nowrap;
+        }
+
+        .trust-divider {
+            width: 1px;
+            height: 20px;
+            background: rgba(255,255,255,0.1);
+        }
+
+        .trust-logos {
+            display: flex;
+            gap: 24px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .trust-name {
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: rgba(255,255,255,0.35);
+            letter-spacing: 0.02em;
+            white-space: nowrap;
+        }
+
+        /* ── Sections (light) ── */
+        .section {
+            padding: 88px 0;
+        }
+
+        .section + .section {
+            border-top: 1px solid var(--border);
+        }
+
+        .section-overline {
+            font-size: 0.68rem;
             font-weight: 600;
             letter-spacing: 0.1em;
             text-transform: uppercase;
-            color: var(--accent);
+            color: var(--accent-bright);
             margin-bottom: 12px;
         }
 
-        .features {
-            padding: 60px 0;
+        .section h2 {
+            font-family: 'Instrument Serif', serif;
+            font-size: clamp(1.8rem, 3vw, 2.4rem);
+            font-weight: 400;
+            line-height: 1.15;
+            margin-bottom: 16px;
+            letter-spacing: -0.015em;
         }
 
-        .features h2 {
-            font-family: 'Playfair Display', serif;
-            font-size: 2rem;
-            text-align: center;
+        .section-subtitle {
+            font-size: 1rem;
+            color: var(--fg-secondary);
+            max-width: 520px;
+            line-height: 1.6;
+        }
+
+        /* ── Capabilities Grid ── */
+        .cap-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
             margin-bottom: 48px;
-            text-wrap: balance;
         }
 
-        .feature-grid {
+        .cap-header-text { max-width: 520px; }
+
+        .cap-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 24px;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1px;
+            background: var(--border);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
         }
 
-        .feature-card {
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: 12px;
+        .cap-item {
+            background: var(--surface);
             padding: 32px 28px;
+            position: relative;
         }
 
-        .feature-icon {
-            width: 44px;
-            height: 44px;
+        .cap-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: var(--radius-sm);
             background: var(--accent-light);
-            border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.3rem;
+            margin-bottom: 16px;
+            color: var(--accent-mid);
+        }
+
+        .cap-icon svg {
+            width: 18px;
+            height: 18px;
+            stroke: currentColor;
+            fill: none;
+            stroke-width: 1.8;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .cap-item h3 {
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: var(--fg);
+        }
+
+        .cap-item p {
+            font-size: 0.85rem;
+            color: var(--fg-secondary);
+            line-height: 1.55;
+        }
+
+        /* ── How It Works ── */
+        .hiw-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 48px;
+            margin-top: 56px;
+        }
+
+        .hiw-step {
+            position: relative;
+        }
+
+        .hiw-num {
+            font-family: 'Instrument Serif', serif;
+            font-size: 3rem;
+            color: var(--border);
+            line-height: 1;
             margin-bottom: 16px;
         }
 
-        .feature-card h3 {
+        .hiw-step h3 {
             font-size: 1.05rem;
             font-weight: 600;
             margin-bottom: 8px;
         }
 
-        .feature-card p {
-            font-size: 0.9rem;
-            color: var(--fg-muted);
+        .hiw-step p {
+            font-size: 0.88rem;
+            color: var(--fg-secondary);
             line-height: 1.55;
         }
 
-        .how-it-works {
-            padding: 80px 0;
-            border-top: 1px solid var(--card-border);
-            background: linear-gradient(180deg, var(--bg) 0%, var(--accent-light) 100%);
+        /* ── Stats Strip ── */
+        .stats-strip {
+            background: var(--accent);
+            padding: 56px 0;
         }
 
-        .how-it-works h2 {
-            font-family: 'Playfair Display', serif;
-            font-size: 2rem;
-            text-align: center;
-            margin-bottom: 16px;
+        @media (prefers-color-scheme: dark) {
+            :root:not([data-theme="light"]) .stats-strip {
+                background: var(--bg-alt);
+                border-top: 1px solid var(--border);
+                border-bottom: 1px solid var(--border);
+            }
+        }
+        :root[data-theme="dark"] .stats-strip {
+            background: var(--bg-alt);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
         }
 
-        .how-it-works > .container > p.subtitle {
-            text-align: center;
-            color: var(--fg-muted);
-            margin-bottom: 48px;
-            max-width: 520px;
-            margin-left: auto;
-            margin-right: auto;
-            font-size: 1.05rem;
-        }
-
-        .flow-steps {
+        .stats-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(4, 1fr);
             gap: 32px;
-            max-width: 840px;
-            margin: 0 auto;
-        }
-
-        .flow-step {
             text-align: center;
-            position: relative;
         }
 
-        .flow-icon {
-            width: 64px;
-            height: 64px;
-            background: var(--accent);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.6rem;
-            margin: 0 auto 16px;
+        .stat-value {
+            font-family: 'Instrument Serif', serif;
+            font-size: 2.6rem;
+            font-weight: 400;
             color: #fff;
-            box-shadow: 0 4px 16px rgba(45, 90, 61, 0.2);
-        }
-
-        .flow-step h4 {
-            font-size: 1.05rem;
-            font-weight: 600;
+            line-height: 1;
             margin-bottom: 6px;
+            letter-spacing: -0.02em;
         }
 
-        .flow-step p {
-            font-size: 0.88rem;
-            color: var(--fg-muted);
-            line-height: 1.5;
+        @media (prefers-color-scheme: dark) {
+            :root:not([data-theme="light"]) .stat-value { color: var(--fg); }
         }
-
-        .flow-step + .flow-step::before {
-            content: '';
-            position: absolute;
-            top: 32px;
-            left: -20px;
-            width: 10px;
-            height: 2px;
-            background: var(--accent);
-            opacity: 0.4;
-        }
-
-        .stats {
-            padding: 60px 0;
-            border-top: 1px solid var(--card-border);
-        }
-
-        .stats h2 {
-            font-family: 'Playfair Display', serif;
-            font-size: 2rem;
-            text-align: center;
-            margin-bottom: 40px;
-        }
-
-        .stat-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 24px;
-            text-align: center;
-        }
-
-        .stat-num {
-            font-family: 'Playfair Display', serif;
-            font-size: 2.4rem;
-            font-weight: 700;
-            color: var(--accent);
-        }
+        :root[data-theme="dark"] .stat-value { color: var(--fg); }
 
         .stat-label {
-            font-size: 0.85rem;
-            color: var(--fg-muted);
-            margin-top: 4px;
-        }
-
-        .retailers {
-            padding: 60px 0;
-            border-top: 1px solid var(--card-border);
-            text-align: center;
-        }
-
-        .retailers h2 {
-            font-family: 'Playfair Display', serif;
-            font-size: 2rem;
-            margin-bottom: 32px;
-        }
-
-        .retailer-logos {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 20px;
-        }
-
-        .retailer-tag {
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: 8px;
-            padding: 12px 24px;
-            font-size: 0.9rem;
+            font-size: 0.78rem;
+            color: rgba(255,255,255,0.65);
             font-weight: 500;
-            color: var(--fg-muted);
         }
 
-        footer {
-            padding: 40px 0;
-            border-top: 1px solid var(--card-border);
+        @media (prefers-color-scheme: dark) {
+            :root:not([data-theme="light"]) .stat-label { color: var(--fg-tertiary); }
+        }
+        :root[data-theme="dark"] .stat-label { color: var(--fg-tertiary); }
+
+        /* ── CTA Section ── */
+        .cta-section {
+            padding: 88px 0;
             text-align: center;
         }
 
-        footer p {
-            font-size: 0.85rem;
-            color: var(--fg-muted);
+        .cta-section h2 {
+            font-family: 'Instrument Serif', serif;
+            font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+            font-weight: 400;
+            margin-bottom: 16px;
+            letter-spacing: -0.015em;
         }
 
-        footer a {
-            color: var(--accent);
+        .cta-section p {
+            font-size: 1rem;
+            color: var(--fg-secondary);
+            max-width: 480px;
+            margin: 0 auto 32px;
+        }
+
+        .btn-primary-lg {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--accent);
+            color: #fff;
+            padding: 15px 36px;
+            border-radius: var(--radius-sm);
             text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: background 0.2s;
+            border: none;
+            cursor: pointer;
         }
 
-        @media (max-width: 640px) {
+        .btn-primary-lg:hover { background: var(--accent-mid); }
+
+        @media (prefers-color-scheme: dark) {
+            :root:not([data-theme="light"]) .btn-primary-lg {
+                background: var(--accent-bright);
+                color: var(--hero-bg);
+            }
+        }
+        :root[data-theme="dark"] .btn-primary-lg {
+            background: var(--accent-bright);
+            color: var(--hero-bg);
+        }
+
+        /* ── Footer ── */
+        .site-footer {
+            padding: 40px 0;
+            border-top: 1px solid var(--border);
+        }
+
+        .footer-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-brand {
+            font-family: 'Instrument Serif', serif;
+            font-size: 1.1rem;
+            color: var(--fg);
+        }
+
+        .footer-brand span {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.78rem;
+            color: var(--fg-tertiary);
+            font-weight: 400;
+            margin-left: 8px;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 24px;
+            align-items: center;
+        }
+
+        .footer-links a {
+            font-size: 0.82rem;
+            color: var(--fg-secondary);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover { color: var(--fg); }
+
+        .footer-copy {
+            font-size: 0.72rem;
+            color: var(--fg-tertiary);
+            text-align: center;
+            margin-top: 24px;
+            padding-top: 24px;
+            border-top: 1px solid var(--border);
+        }
+
+        /* ── Responsive ── */
+        @media (max-width: 768px) {
+            .hero { padding: 120px 0 56px; }
+            .hero-inner { grid-template-columns: 1fr; gap: 40px; }
+            .cert-preview { display: none; }
+            .cap-grid { grid-template-columns: 1fr; }
+            .hiw-grid { grid-template-columns: 1fr; gap: 32px; }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 24px; }
             .nav-links { display: none; }
-            .hero { padding: 48px 0 40px; }
-            .flow-steps { grid-template-columns: 1fr; gap: 24px; }
-            .flow-step + .flow-step::before { display: none; }
+            .trust-logos { gap: 16px; }
+            .trust-divider { display: none; }
+            .trust-inner { gap: 16px; }
+            .cap-header { flex-direction: column; align-items: flex-start; gap: 16px; }
+            .footer-inner { flex-direction: column; gap: 16px; text-align: center; }
+            .cert-metrics { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 480px) {
+            .stats-grid { grid-template-columns: 1fr 1fr; }
+            .trust-logos { justify-content: center; }
         }
     </style>
 </head>
 <body>
-    <nav>
-        <div class="container">
-            <a href="/" class="logo">Weft <span>AI</span></a>
+
+    <nav class="site-nav" role="navigation" aria-label="Main navigation">
+        <div class="wrap">
+            <a href="/" class="logo">Weft<em>AI</em></a>
             <ul class="nav-links">
-                <li><a href="#pipeline">How It Works</a></li>
+                <li><a href="#capabilities">Capabilities</a></li>
+                <li><a href="#how-it-works">How It Works</a></li>
                 <li><a href="#coverage">Coverage</a></li>
-                <li><a href="#contact">Contact</a></li>
+                <li><a href="mailto:nischay.vaish@gmail.com" class="nav-cta">Get Early Access</a></li>
             </ul>
         </div>
     </nav>
 
     <section class="hero">
-        <div class="container">
-            <div class="hero-badge">UK Womenswear</div>
-            <h1>Fashion Trend Intelligence,<br>Before the Crowd</h1>
-            <p>Weft AI detects emerging fashion trends from social signals, validates them against search and retail data, and forecasts adoption timing — so brands buy right, early.</p>
-            <a href="mailto:nischay.vaish@gmail.com" class="cta-btn">Get Early Access</a>
-        </div>
-    </section>
+        <div class="wrap">
+            <div class="hero-inner">
+                <div class="hero-text">
+                    <div class="overline">
+                        <span class="overline-dot"></span>
+                        UK Womenswear Intelligence
+                    </div>
+                    <h1>Spot the trend.<br>Know <em>when</em> to buy.</h1>
+                    <p class="hero-desc">Weft AI detects emerging fashion trends from social signals, validates them against search and retail data, and forecasts adoption timing — so brands buy right, early.</p>
+                    <div class="hero-actions">
+                        <a href="mailto:nischay.vaish@gmail.com" class="btn-primary">Request Early Access</a>
+                        <a href="#how-it-works" class="btn-ghost">
+                            See how it works
+                            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 2v10m0 0l4-4m-4 4L3 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </a>
+                    </div>
+                </div>
 
-    <section class="features">
-        <div class="container">
-            <p class="section-label" style="text-align:center">What We Do</p>
-            <h2>From Social Signal to Buy Decision</h2>
-            <div class="feature-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">&#128065;</div>
-                    <h3>Trend Detection</h3>
-                    <p>Our AI identifies emerging garment trends — silhouettes, fabrics, colours, patterns — from thousands of creator posts across the UK fashion landscape.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">&#128200;</div>
-                    <h3>Causal Attribution</h3>
-                    <p>Not just correlation — we identify why a trend is growing: creator seeding, viral moments, seasonal demand, or price-driven adoption.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">&#127919;</div>
-                    <h3>Adoption Forecasting</h3>
-                    <p>Proprietary models predict when a trend crosses from early adopters to mainstream, giving brands a precise buy window with lead-time in weeks.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">&#9989;</div>
-                    <h3>Triple Validation</h3>
-                    <p>Every trend is confirmed against three external signals: Google search interest, UK retail shelf presence, and runway origin — no single-source guessing.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">&#128717;</div>
-                    <h3>Retail Price Monitoring</h3>
-                    <p>Daily product feeds from UK fashion retailers tracked for availability, pricing, new arrivals, and stock depletion across trending categories.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">&#128220;</div>
-                    <h3>Trend Certificate</h3>
-                    <p>One-page actionable output per trend: growth rate, causal drivers, adoption forecast, validation score, and a clear buy/monitor/avoid recommendation.</p>
+                <div class="cert-preview" role="img" aria-label="Example Trend Certificate showing linen trousers trend data">
+                    <div class="cert-header">
+                        <div>
+                            <div class="cert-title">Trend Certificate</div>
+                            <div class="cert-trend-name">Linen Wide-Leg Trousers</div>
+                        </div>
+                        <span class="cert-badge cert-badge-buy">
+                            <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5.5L4 7.5L8 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                            Buy Now
+                        </span>
+                    </div>
+                    <div class="cert-metrics">
+                        <div class="cert-metric">
+                            <div class="cert-metric-label">Growth Rate</div>
+                            <div class="cert-metric-value up">+67%</div>
+                        </div>
+                        <div class="cert-metric">
+                            <div class="cert-metric-label">Validation</div>
+                            <div class="cert-metric-value">3 / 3</div>
+                        </div>
+                        <div class="cert-metric">
+                            <div class="cert-metric-label">Buy Window</div>
+                            <div class="cert-metric-value">4 wks</div>
+                        </div>
+                    </div>
+                    <div class="cert-chart" aria-hidden="true">
+                        <div class="chart-bar" style="height: 18%"></div>
+                        <div class="chart-bar" style="height: 22%"></div>
+                        <div class="chart-bar" style="height: 20%"></div>
+                        <div class="chart-bar" style="height: 28%"></div>
+                        <div class="chart-bar" style="height: 25%"></div>
+                        <div class="chart-bar" style="height: 34%"></div>
+                        <div class="chart-bar" style="height: 42%"></div>
+                        <div class="chart-bar" style="height: 38%"></div>
+                        <div class="chart-bar" style="height: 52%"></div>
+                        <div class="chart-bar" style="height: 58%"></div>
+                        <div class="chart-bar" style="height: 55%"></div>
+                        <div class="chart-bar" style="height: 68%"></div>
+                        <div class="chart-bar" style="height: 72%"></div>
+                        <div class="chart-bar" style="height: 78%"></div>
+                        <div class="chart-bar" style="height: 85%"></div>
+                        <div class="chart-bar" style="height: 92%"></div>
+                    </div>
+                    <div class="cert-footer">
+                        <div class="cert-footer-item">
+                            <span class="cert-dot cert-dot-green"></span>
+                            Search demand rising
+                        </div>
+                        <div class="cert-footer-item">
+                            <span class="cert-dot cert-dot-green"></span>
+                            9/12 retailers stocking
+                        </div>
+                        <div class="cert-footer-item">
+                            <span class="cert-dot cert-dot-amber"></span>
+                            Early → Mainstream
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="how-it-works" id="pipeline">
-        <div class="container">
-            <p class="section-label" style="text-align:center">How It Works</p>
-            <h2>Intelligence, Delivered Weekly</h2>
-            <p class="subtitle">Our proprietary AI pipeline turns raw social signals into actionable buy decisions — so you don't have to.</p>
-            <div class="flow-steps">
-                <div class="flow-step">
-                    <div class="flow-icon">&#128225;</div>
-                    <h4>We Listen</h4>
+    <div class="trust-bar">
+        <div class="wrap">
+            <div class="trust-inner">
+                <span class="trust-label">Tracking 12 UK Retailers</span>
+                <span class="trust-divider"></span>
+                <div class="trust-logos">
+                    <span class="trust-name">ASOS</span>
+                    <span class="trust-name">Zara</span>
+                    <span class="trust-name">H&amp;M</span>
+                    <span class="trust-name">Next</span>
+                    <span class="trust-name">M&amp;S</span>
+                    <span class="trust-name">River Island</span>
+                    <span class="trust-name">Boohoo</span>
+                    <span class="trust-name">Reiss</span>
+                    <span class="trust-name">AllSaints</span>
+                    <span class="trust-name">John Lewis</span>
+                    <span class="trust-name">PrettyLittleThing</span>
+                    <span class="trust-name">Karen Millen</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="section" id="capabilities">
+        <div class="wrap">
+            <div class="cap-header">
+                <div class="cap-header-text">
+                    <div class="section-overline">Capabilities</div>
+                    <h2>From social signal to buy decision</h2>
+                    <p class="section-subtitle">Every trend is detected, attributed, validated, and timed — so your buying team gets a recommendation, not raw data.</p>
+                </div>
+            </div>
+            <div class="cap-grid">
+                <div class="cap-item">
+                    <div class="cap-icon">
+                        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M2 12s4-8 10-8 10 8 10 8-4 8-10 8-10-8-10-8z"/></svg>
+                    </div>
+                    <h3>Trend Detection</h3>
+                    <p>Identifies emerging garment trends — silhouettes, fabrics, colours, patterns — from thousands of creator posts across the UK.</p>
+                </div>
+                <div class="cap-item">
+                    <div class="cap-icon">
+                        <svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+                    </div>
+                    <h3>Causal Attribution</h3>
+                    <p>Not just correlation — identifies why a trend is growing: creator seeding, viral moments, seasonal demand, or price-driven adoption.</p>
+                </div>
+                <div class="cap-item">
+                    <div class="cap-icon">
+                        <svg viewBox="0 0 24 24"><path d="M12 2v4m0 12v4M4.93 4.93l2.83 2.83m8.48 8.48l2.83 2.83M2 12h4m12 0h4M4.93 19.07l2.83-2.83m8.48-8.48l2.83-2.83"/></svg>
+                    </div>
+                    <h3>Adoption Forecasting</h3>
+                    <p>Proprietary models predict when a trend crosses from early adopters to mainstream, with a precise buy window in weeks.</p>
+                </div>
+                <div class="cap-item">
+                    <div class="cap-icon">
+                        <svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
+                    </div>
+                    <h3>Triple Validation</h3>
+                    <p>Every trend confirmed against three external signals: Google search interest, UK retail shelf presence, and runway origin.</p>
+                </div>
+                <div class="cap-item">
+                    <div class="cap-icon">
+                        <svg viewBox="0 0 24 24"><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
+                    </div>
+                    <h3>Retail Monitoring</h3>
+                    <p>Daily product feeds from UK fashion retailers tracked for availability, pricing, new arrivals, and stock depletion.</p>
+                </div>
+                <div class="cap-item">
+                    <div class="cap-icon">
+                        <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8m8 4H8m2-8H8"/></svg>
+                    </div>
+                    <h3>Trend Certificate</h3>
+                    <p>One-page output per trend: growth rate, causal drivers, forecast, validation score, and a clear buy / monitor / avoid call.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="how-it-works">
+        <div class="wrap">
+            <div class="section-overline">How It Works</div>
+            <h2>Intelligence, delivered weekly</h2>
+            <p class="section-subtitle">Our proprietary AI pipeline turns raw social signals into actionable buy decisions — so you don't have to.</p>
+            <div class="hiw-grid">
+                <div class="hiw-step">
+                    <div class="hiw-num">01</div>
+                    <h3>We Listen</h3>
                     <p>Our AI continuously monitors social signals across the UK fashion landscape — creators, engagement, and emerging patterns.</p>
                 </div>
-                <div class="flow-step">
-                    <div class="flow-icon">&#128300;</div>
-                    <h4>We Validate</h4>
+                <div class="hiw-step">
+                    <div class="hiw-num">02</div>
+                    <h3>We Validate</h3>
                     <p>Every signal is cross-checked against search demand, retail availability, and runway data. No single-source guessing.</p>
                 </div>
-                <div class="flow-step">
-                    <div class="flow-icon">&#128203;</div>
-                    <h4>You Act</h4>
+                <div class="hiw-step">
+                    <div class="hiw-num">03</div>
+                    <h3>You Act</h3>
                     <p>You receive a Trend Certificate with a clear recommendation: buy now, monitor, or skip — with the timing to move first.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="stats">
-        <div class="container">
-            <p class="section-label" style="text-align:center">Current Data</p>
-            <h2>Built on Real UK Fashion Data</h2>
-            <div class="stat-grid">
+    <div class="stats-strip">
+        <div class="wrap">
+            <div class="stats-grid">
                 <div>
-                    <div class="stat-num">10K+</div>
+                    <div class="stat-value">10K+</div>
                     <div class="stat-label">Fashion images analysed</div>
                 </div>
                 <div>
-                    <div class="stat-num">1,480</div>
+                    <div class="stat-value">1,480</div>
                     <div class="stat-label">Reels with engagement data</div>
                 </div>
                 <div>
-                    <div class="stat-num">79</div>
+                    <div class="stat-value">79</div>
                     <div class="stat-label">UK influencer panelists</div>
                 </div>
                 <div>
-                    <div class="stat-num">94.6%</div>
-                    <div class="stat-label">Category extraction accuracy</div>
+                    <div class="stat-value">94.6%</div>
+                    <div class="stat-label">Extraction accuracy</div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
 
-    <section class="retailers" id="coverage">
-        <div class="container">
-            <p class="section-label">Retail Coverage</p>
-            <h2>UK Fashion Retailers We Track</h2>
-            <div class="retailer-logos">
-                <div class="retailer-tag">ASOS</div>
-                <div class="retailer-tag">Boohoo</div>
-                <div class="retailer-tag">Next</div>
-                <div class="retailer-tag">M&amp;S</div>
-                <div class="retailer-tag">River Island</div>
-                <div class="retailer-tag">PrettyLittleThing</div>
-                <div class="retailer-tag">Karen Millen</div>
-                <div class="retailer-tag">Reiss</div>
-                <div class="retailer-tag">AllSaints</div>
-                <div class="retailer-tag">John Lewis</div>
-                <div class="retailer-tag">Zara</div>
-                <div class="retailer-tag">H&amp;M</div>
-            </div>
+    <section class="cta-section" id="contact">
+        <div class="wrap">
+            <h2>Ready to buy ahead of the curve?</h2>
+            <p>Join the early access programme. We work with a small number of UK fashion brands during the pilot — apply to secure your slot.</p>
+            <a href="mailto:nischay.vaish@gmail.com" class="btn-primary-lg">Request Early Access</a>
         </div>
     </section>
 
-    <footer id="contact">
-        <div class="container">
-            <p style="margin-bottom: 8px;"><strong>Weft AI</strong> — Fashion Trend Intelligence</p>
-            <p>London, United Kingdom</p>
-            <p style="margin-top: 8px;"><a href="mailto:nischay.vaish@gmail.com">nischay.vaish@gmail.com</a></p>
-            <p style="margin-top: 16px; font-size: 0.75rem;">&copy; 2026 Weft AI. All rights reserved.</p>
+    <footer class="site-footer">
+        <div class="wrap">
+            <div class="footer-inner">
+                <div class="footer-brand">Weft<span>AI — Fashion Trend Intelligence</span></div>
+                <div class="footer-links">
+                    <span style="font-size: 0.82rem; color: var(--fg-tertiary);">London, United Kingdom</span>
+                    <a href="mailto:nischay.vaish@gmail.com">nischay.vaish@gmail.com</a>
+                </div>
+            </div>
+            <p class="footer-copy">&copy; 2026 Weft AI. All rights reserved.</p>
         </div>
     </footer>
+
 </body>
 </html>
