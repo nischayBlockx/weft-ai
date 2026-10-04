@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weft AI — Fashion Trend Intelligence</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <!-- Awin publisher verification -->
+    <style>
+        :root {
+            --bg: #FAFAF8;
+            --fg: #1A1A1A;
+            --fg-muted: #6B6B6B;
+            --accent: #2D5A3D;
+            --accent-light: #E8F0EB;
+            --card-bg: #FFFFFF;
+            --card-border: #E8E8E4;
+            --gradient-start: #2D5A3D;
+            --gradient-end: #1B3A26;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg);
+            color: var(--fg);
+            line-height: 1.6;
+        }
+        .container { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+        nav { padding: 20px 0; border-bottom: 1px solid var(--card-border); }
+        nav .container { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 700; color: var(--accent); text-decoration: none; }
+        .logo span { font-family: 'Inter', sans-serif; font-weight: 400; font-size: 0.85rem; color: var(--fg-muted); margin-left: 8px; }
+        .nav-links { display: flex; gap: 32px; list-style: none; }
+        .nav-links a { text-decoration: none; color: var(--fg-muted); font-size: 0.9rem; font-weight: 500; transition: color 0.2s; }
+        .nav-links a:hover { color: var(--accent); }
+        .hero { padding: 80px 0 60px; text-align: center; }
+        .hero-badge { display: inline-block; background: var(--accent-light); color: var(--accent); font-size: 0.8rem; font-weight: 600; padding: 6px 16px; border-radius: 20px; margin-bottom: 24px; letter-spacing: 0.05em; text-transform: uppercase; }
+        h1 { font-family: 'Playfair Display', serif; font-size: clamp(2.2rem, 5vw, 3.5rem); font-weight: 700; line-height: 1.15; margin-bottom: 20px; text-wrap: balance; }
+        .hero p { font-size: 1.15rem; color: var(--fg-muted); max-width: 600px; margin: 0 auto 36px; }
+        .cta-btn { display: inline-block; background: var(--accent); color: #fff; padding: 14px 32px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 0.95rem; transition: background 0.2s; }
+        .cta-btn:hover { background: var(--gradient-end); }
+        .section-label { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 12px; }
+        .features { padding: 60px 0; }
+        .features h2 { font-family: 'Playfair Display', serif; font-size: 2rem; text-align: center; margin-bottom: 48px; text-wrap: balance; }
+        .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
+        .feature-card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 12px; padding: 32px 28px; }
+        .feature-icon { width: 44px; height: 44px; background: var(--accent-light); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; margin-bottom: 16px; }
+        .feature-card h3 { font-size: 1.05rem; font-weight: 600; margin-bottom: 8px; }
+        .feature-card p { font-size: 0.9rem; color: var(--fg-muted); line-height: 1.55; }
+        .pipeline { padding: 60px 0; border-top: 1px solid var(--card-border); }
+        .pipeline h2 { font-family: 'Playfair Display', serif; font-size: 2rem; text-align: center; margin-bottom: 16px; }
+        .pipeline > .container > p { text-align: center; color: var(--fg-muted); margin-bottom: 40px; max-width: 560px; margin-left: auto; margin-right: auto; }
+        .pipeline-steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
+        .step { text-align: center; padding: 24px 16px; background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 10px; }
+        .step-num { display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; background: var(--accent); color: #fff; border-radius: 50%; font-size: 0.8rem; font-weight: 700; margin-bottom: 12px; }
+        .step h4 { font-size: 0.9rem; font-weight: 600; margin-bottom: 4px; }
+        .step p { font-size: 0.8rem; color: var(--fg-muted); }
+        .stats { padding: 60px 0; border-top: 1px solid var(--card-border); }
+        .stats h2 { font-family: 'Playfair Display', serif; font-size: 2rem; text-align: center; margin-bottom: 40px; }
+        .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 24px; text-align: center; }
+        .stat-num { font-family: 'Playfair Display', serif; font-size: 2.4rem; font-weight: 700; color: var(--accent); }
+        .stat-label { font-size: 0.85rem; color: var(--fg-muted); margin-top: 4px; }
+        .retailers { padding: 60px 0; border-top: 1px solid var(--card-border); text-align: center; }
+        .retailers h2 { font-family: 'Playfair Display', serif; font-size: 2rem; margin-bottom: 32px; }
+        .retailer-logos { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; }
+        .retailer-tag { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 8px; padding: 12px 24px; font-size: 0.9rem; font-weight: 500; color: var(--fg-muted); }
+        footer { padding: 40px 0; border-top: 1px solid var(--card-border); text-align: center; }
+        footer p { font-size: 0.85rem; color: var(--fg-muted); }
+        footer a { color: var(--accent); text-decoration: none; }
+        @media (max-width: 640px) {
+            .nav-links { display: none; }
+            .hero { padding: 48px 0 40px; }
+            .pipeline-steps { grid-template-columns: repeat(2, 1fr); }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="container">
+            <a href="/" class="logo">Weft <span>AI</span></a>
+            <ul class="nav-links">
+                <li><a href="#pipeline">Pipeline</a></li>
+                <li><a href="#coverage">Coverage</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+    <section class="hero">
+        <div class="container">
+            <div class="hero-badge">UK Womenswear</div>
+            <h1>Fashion Trend Intelligence,<br>Before the Crowd</h1>
+            <p>Weft AI detects emerging fashion trends from social signals, validates them against search and retail data, and forecasts adoption timing — so brands buy right, early.</p>
+            <a href="mailto:nischay.vaish@gmail.com" class="cta-btn">Get Early Access</a>
+        </div>
+    </section>
+    <section class="features">
+        <div class="container">
+            <p class="section-label" style="text-align:center">What We Do</p>
+            <h2>From Social Signal to Buy Decision</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">&#128065;</div>
+                    <h3>Trend Detection</h3>
+                    <p>Computer vision extracts garment attributes — silhouette, fabric, colour, pattern — from thousands of influencer images and reels across the UK fashion panel.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">&#128200;</div>
+                    <h3>Causal Attribution</h3>
+                    <p>Not just correlation — Weft identifies why a trend is growing: creator seeding, viral sounds, seasonal demand, or price-driven adoption.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">&#127919;</div>
+                    <h3>Adoption Forecasting</h3>
+                    <p>Diffusion models predict when a trend crosses from early adopters to mainstream, giving brands a precise buy window with lead-time in weeks.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">&#9989;</div>
+                    <h3>Triple Validation</h3>
+                    <p>Every trend is confirmed against three external signals: Google search interest, UK retail shelf presence, and runway origin — no single-source guessing.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">&#128717;</div>
+                    <h3>Retail Price Monitoring</h3>
+                    <p>Daily product feeds from UK fashion retailers tracked for availability, pricing, new arrivals, and stock depletion across trending categories.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">&#128220;</div>
+                    <h3>Trend Certificate</h3>
+                    <p>One-page actionable output per trend: growth rate, causal drivers, adoption forecast, validation score, and a clear buy/monitor/avoid recommendation.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="pipeline" id="pipeline">
+        <div class="container">
+            <p class="section-label" style="text-align:center">Pipeline</p>
+            <h2>Seven-Step Intelligence Engine</h2>
+            <p>Each step feeds the next — from raw social content to an investor-grade trend forecast.</p>
+            <div class="pipeline-steps">
+                <div class="step"><div class="step-num">1</div><h4>Panel Selection</h4><p>79 UK fashion influencers scored and balanced</p></div>
+                <div class="step"><div class="step-num">2</div><h4>Image Scoring</h4><p>FashionCLIP + BLIP fashion-purity gate</p></div>
+                <div class="step"><div class="step-num">3</div><h4>Attribute Extraction</h4><p>Fashion Florence + Gemini on images and reels</p></div>
+                <div class="step"><div class="step-num">4</div><h4>Trend Aggregation</h4><p>Clustering + time-series growth scoring</p></div>
+                <div class="step"><div class="step-num">5</div><h4>Causal Engine</h4><p>EconML driver attribution</p></div>
+                <div class="step"><div class="step-num">6</div><h4>Diffusion Model</h4><p>Bass + Gompertz adoption forecast</p></div>
+                <div class="step"><div class="step-num">7</div><h4>Trend Certificate</h4><p>Actionable buy recommendation</p></div>
+            </div>
+        </div>
+    </section>
+    <section class="stats">
+        <div class="container">
+            <p class="section-label" style="text-align:center">Current Data</p>
+            <h2>Built on Real UK Fashion Data</h2>
+            <div class="stat-grid">
+                <div><div class="stat-num">10K+</div><div class="stat-label">Fashion images analysed</div></div>
+                <div><div class="stat-num">1,480</div><div class="stat-label">Reels with engagement data</div></div>
+                <div><div class="stat-num">79</div><div class="stat-label">UK influencer panelists</div></div>
+                <div><div class="stat-num">94.6%</div><div class="stat-label">Category extraction accuracy</div></div>
+            </div>
+        </div>
+    </section>
+    <section class="retailers" id="coverage">
+        <div class="container">
+            <p class="section-label">Retail Coverage</p>
+            <h2>UK Fashion Retailers We Track</h2>
+            <div class="retailer-logos">
+                <div class="retailer-tag">ASOS</div>
+                <div class="retailer-tag">Boohoo</div>
+                <div class="retailer-tag">Next</div>
+                <div class="retailer-tag">M&amp;S</div>
+                <div class="retailer-tag">River Island</div>
+                <div class="retailer-tag">PrettyLittleThing</div>
+                <div class="retailer-tag">Karen Millen</div>
+                <div class="retailer-tag">Reiss</div>
+                <div class="retailer-tag">AllSaints</div>
+                <div class="retailer-tag">John Lewis</div>
+                <div class="retailer-tag">Zara</div>
+                <div class="retailer-tag">H&amp;M</div>
+            </div>
+        </div>
+    </section>
+    <footer id="contact">
+        <div class="container">
+            <p style="margin-bottom: 8px;"><strong>Weft AI</strong> — Fashion Trend Intelligence</p>
+            <p>London, United Kingdom</p>
+            <p style="margin-top: 8px;"><a href="mailto:nischay.vaish@gmail.com">nischay.vaish@gmail.com</a></p>
+            <p style="margin-top: 16px; font-size: 0.75rem;">&copy; 2026 Weft AI. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
